@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.customtabs.CustomTabsIntent;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.SwitchCompat;
-import android.support.v7.widget.Toolbar;
+import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.core.content.ContextCompat;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,8 +16,10 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import ss.com.bannerslider.Slider;
+import ss.com.bannerslider.event.OnSlideClickListener;
 import ss.com.bannerslider.indicators.IndicatorShape;
 
 public class MainActivity extends AppCompatActivity {
@@ -43,8 +45,17 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 slider.setAdapter(new MainSliderAdapter());
                 slider.setSelectedSlide(0);
+
+                slider.setOnSlideClickListener(new OnSlideClickListener() {
+                    @Override
+                    public void onSlideClick(int position) {
+                        Toast.makeText(MainActivity.this, position+"", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         }, 1500);
+
+
 
     }
 

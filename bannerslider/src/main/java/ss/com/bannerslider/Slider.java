@@ -4,11 +4,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -74,6 +74,7 @@ public class Slider extends FrameLayout {
                         .emptyView(typedArray.getResourceId(R.styleable.Slider_slider_emptyView, Config.NOT_SELECTED))
                         .indicatorSize(typedArray.getDimensionPixelSize(R.styleable.Slider_slider_indicatorSize, 0))
                         .loopSlides(typedArray.getBoolean(R.styleable.Slider_slider_loopSlides, false))
+                        .zoomAble(typedArray.getBoolean(R.styleable.Slider_slider_zoomAble, false))
                         .slideChangeInterval(typedArray.getInteger(R.styleable.Slider_slider_interval, 0))
                         .selectedSlideIndicator(typedArray.getDrawable(R.styleable.Slider_slider_selectedSlideIndicator))
                         .unselectedSlideIndicator(typedArray.getDrawable(R.styleable.Slider_slider_unselectedSlideIndicator))
@@ -196,7 +197,7 @@ public class Slider extends FrameLayout {
             final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
             recyclerView.setLayoutManager(linearLayoutManager);
             positionController = new PositionController(sliderAdapter, config.loopSlides);
-            adapter = new SliderRecyclerViewAdapter(sliderAdapter, sliderAdapter.getItemCount() > 1 && config.loopSlides, recyclerView.getLayoutParams(), new OnTouchListener() {
+            adapter = new SliderRecyclerViewAdapter(sliderAdapter, sliderAdapter.getItemCount() > 1 && config.loopSlides,config.zoomAble, recyclerView.getLayoutParams(), new OnTouchListener() {
                 @Override
                 public boolean onTouch(View v, MotionEvent event) {
                     if (event.getAction() == MotionEvent.ACTION_DOWN) {

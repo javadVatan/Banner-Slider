@@ -8,6 +8,7 @@
         <attr name="slider_animateIndicators" format="boolean" />
         <attr name="slider_interval" format="integer" />
         <attr name="slider_loopSlides" format="boolean" />
+        <attr name="slider_zoomAble" format="boolean" />
         <attr name="slider_defaultBanner" format="integer" />
         <attr name="slider_emptyView" format="reference" />
     </declare-styleable>

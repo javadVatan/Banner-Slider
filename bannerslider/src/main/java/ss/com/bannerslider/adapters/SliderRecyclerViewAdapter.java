@@ -1,10 +1,11 @@
 package ss.com.bannerslider.adapters;
 
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import ss.com.bannerslider.zoomage.ZoomageView;
 
 import ss.com.bannerslider.SlideType;
 import ss.com.bannerslider.event.OnSlideClickListener;
@@ -20,13 +21,15 @@ public class SliderRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     private OnSlideClickListener onSlideClickListener;
     private SliderAdapter sliderAdapter;
     private boolean loop;
+    private boolean zoomAble;
     private View.OnTouchListener itemOnTouchListener;
     private PositionController positionController;
 
-    public SliderRecyclerViewAdapter(SliderAdapter iSliderAdapter, boolean loop, ViewGroup.LayoutParams imageViewLayoutParams, View.OnTouchListener itemOnTouchListener, PositionController positionController) {
+    public SliderRecyclerViewAdapter(SliderAdapter iSliderAdapter, boolean loop, boolean zoomAble, ViewGroup.LayoutParams imageViewLayoutParams, View.OnTouchListener itemOnTouchListener, PositionController positionController) {
         this.sliderAdapter = iSliderAdapter;
         this.imageViewLayoutParams = imageViewLayoutParams;
         this.loop = loop;
+        this.zoomAble = zoomAble;
         this.itemOnTouchListener = itemOnTouchListener;
         this.positionController = positionController;
     }
@@ -38,10 +41,11 @@ public class SliderRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == SlideType.IMAGE.getValue()) {
-            ImageView imageView = new ImageView(parent.getContext());
+            ZoomageView imageView = new ZoomageView(parent.getContext());
             imageView.setLayoutParams(imageViewLayoutParams);
             imageView.setAdjustViewBounds(true);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setZoomable(zoomAble);
             return new ImageSlideViewHolder(imageView);
         } else {
             return null;

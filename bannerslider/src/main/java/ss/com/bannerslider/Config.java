@@ -2,7 +2,7 @@ package ss.com.bannerslider;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 /**
  * @author S.Shahini
@@ -13,6 +13,7 @@ public class Config {
     public static final int NOT_SELECTED = -1;
     protected boolean hideIndicators = false;
     protected boolean loopSlides = true;
+    protected boolean zoomAble = false;
     protected int indicatorSize = NOT_SELECTED;
     protected Drawable selectedSlideIndicator;
     protected Drawable unselectedSlideIndicator;
@@ -39,6 +40,11 @@ public class Config {
 
         public Builder loopSlides(boolean loopSlides) {
             config.loopSlides = loopSlides;
+            return this;
+        }
+
+        public Builder zoomAble(boolean zoomAble) {
+            config.zoomAble = zoomAble;
             return this;
         }
 
